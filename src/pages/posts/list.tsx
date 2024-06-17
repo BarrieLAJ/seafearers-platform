@@ -46,9 +46,9 @@ export const PostList = () => {
 			<Table
 				{...tableProps}
 				loading={tableProps.loading}
-				pagination={{
-					defaultPageSize: 50,
-				}}
+				// pagination={{
+				// 	// defaultPageSize: 50,
+				// }}
 				rowKey="_id"
 			>
 				<Table.Column
