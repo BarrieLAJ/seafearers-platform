@@ -1,4 +1,4 @@
-import { GitHubBanner, Refine } from "@refinedev/core";
+import { Refine } from "@refinedev/core";
 import {
 	useNotificationProvider,
 	ThemedLayoutV2,
@@ -31,70 +31,73 @@ const client = createClient({
 
 const App: React.FC = () => {
 	return (
-		<DevtoolsProvider>
-			<BrowserRouter>
-				{/* <GitHubBanner /> */}
-				<ConfigProvider theme={RefineThemes.Blue}>
-					<AntdApp>
-						<Refine
-							routerProvider={routerProvider}
-							dataProvider={dataProvider(client)}
-							resources={[
-								{
-									name: "seaWorkers",
-									list: "/seaWorkers",
-									show: "/seaWorkers/show/:id",
-									create: "/seaWorkers/create",
-									edit: "/seaWorkers/edit/:id",
-									meta: {
-										canDelete: true,
-									},
+		// <DevtoolsProvider>
+		<BrowserRouter>
+			<ConfigProvider theme={RefineThemes.Blue}>
+				<AntdApp>
+					<Refine
+						routerProvider={routerProvider}
+						dataProvider={dataProvider(client)}
+						resources={[
+							{
+								name: "seaWorkers",
+								list: "/seaWorkers",
+								show: "/seaWorkers/show/:id",
+								create: "/seaWorkers/create",
+								edit: "/seaWorkers/edit/:id",
+								meta: {
+									canDelete: false,
+									label: "Seafearers",
 								},
-								// {
-								// 	name: "category",
-								// 	list: "/category",
-								// 	create: "/category/create",
-								// 	edit: "/category/edit/:id",
-								// 	meta: {
-								// 		canDelete: true,
-								// 	},
-								// },
-							]}
-							notificationProvider={useNotificationProvider}
-							options={{
-								liveMode: "auto",
-								syncWithLocation: true,
-								warnWhenUnsavedChanges: true,
-							}}
-						>
-							<Routes>
-								<Route
-									element={
-										<ThemedLayoutV2>
-											<Outlet />
-										</ThemedLayoutV2>
-									}
-								>
-									<Route index element={<NavigateToResource />} />
+							},
+							// {
+							// 	name: "category",
+							// 	list: "/category",
+							// 	create: "/category/create",
+							// 	edit: "/category/edit/:id",
+							// 	meta: {
+							// 		canDelete: true,
+							// 	},
+							// },
+						]}
+						notificationProvider={useNotificationProvider}
+						options={{
+							title: {
+								text: "Seafearers Union",
+							},
+							liveMode: "auto",
+							syncWithLocation: true,
+							warnWhenUnsavedChanges: true,
+						}}
+					>
+						<Routes>
+							<Route
+								element={
+									<ThemedLayoutV2>
+										<Outlet />
+									</ThemedLayoutV2>
+								}
+							>
+								<Route index element={<NavigateToResource />} />
 
-									<Route path="/seaWorkers">
-										<Route index element={<PostList />} />
-										<Route path="create" element={<PostCreate />} />
-										<Route path="edit/:id" element={<PostEdit />} />
-										<Route path="show/:id" element={<PostShow />} />
-									</Route>
-
-									<Route path="*" element={<ErrorComponent />} />
+								<Route path="/seaWorkers">
+									<Route index element={<PostList />} />
+									<Route path="create" element={<PostCreate />} />
+									<Route path="edit/:id" element={<PostEdit />} />
+									<Route path="show/:id" element={<PostShow />} />
 								</Route>
-							</Routes>
-							<UnsavedChangesNotifier />
-							<DocumentTitleHandler />
-						</Refine>
-					</AntdApp>
-				</ConfigProvider>
-				<DevtoolsPanel />
-			</BrowserRouter>
-		</DevtoolsProvider>
+
+								<Route path="*" element={<ErrorComponent />} />
+							</Route>
+						</Routes>
+						<UnsavedChangesNotifier />
+						<DocumentTitleHandler />
+					</Refine>
+				</AntdApp>
+			</ConfigProvider>
+			{/* <DevtoolsPanel /> */}
+		</BrowserRouter>
+		// {/* </DevtoolsProvider> */}
 	);
 };
 

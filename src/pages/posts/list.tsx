@@ -33,7 +33,7 @@ export const PostList = () => {
 		filters: {
 			initial: [
 				{
-					field: "title",
+					field: "fullName",
 					operator: "contains",
 					value: null,
 				},
@@ -41,24 +41,16 @@ export const PostList = () => {
 		},
 	});
 
-	const { selectProps: selectPropsCategory, queryResult: queryResultCategory } =
-		useSelect({
-			resource: "category",
-			optionLabel: "title",
-			optionValue: "_id",
-			pagination: {
-				mode: "off",
-			},
-		});
-
 	return (
-		<List>
+		<List canCreate={false}>
 			<Table
 				{...tableProps}
-				loading={tableProps.loading || queryResultCategory.isLoading}
+				loading={tableProps.loading}
+				pagination={{
+					defaultPageSize: 50,
+				}}
 				rowKey="_id"
 			>
-				{/* <Table.Column dataIndex="_id" title="ID" /> */}
 				<Table.Column
 					dataIndex="fullName"
 					title="Name"
@@ -81,7 +73,7 @@ export const PostList = () => {
 					dataIndex="age"
 					title="Age"
 					render={(value) => {
-						return <NumberField value={+value} />;
+						return <TextField value={value} />;
 					}}
 				/>
 				<Table.Column
@@ -98,43 +90,6 @@ export const PostList = () => {
 						return <TextField value={value} />;
 					}}
 				/>
-				{/* <Table.Column<ISeaWorkers>
-					dataIndex="categories[]._ref"
-					title="Category"
-					render={(_, record) => {
-						if (queryResultCategory.isLoading) return null;
-
-						const categoryIds = record?.categories?.map((category) => category._ref);
-
-						const categories = selectPropsCategory?.options?.filter((category) =>
-							categoryIds?.includes(category?.value?.toString() || "")
-						);
-
-						if (!categories?.length) return "-";
-
-						return (
-							<Space>
-								{categories?.map((category) => (
-									<TagField key={category.value} value={category.label} />
-								))}
-							</Space>
-						);
-					}}
-					defaultFilteredValue={getDefaultFilter(
-						"categories._ref",
-						filters,
-						"contains"
-					)}
-					filterDropdown={(props) => (
-						<FilterDropdown {...props}>
-							<Select
-								{...selectPropsCategory}
-								style={{ width: "200px" }}
-								placeholder="Select Category"
-							/>
-						</FilterDropdown>
-					)}
-				/> */}
 				<Table.Column
 					dataIndex="_updatedAt"
 					title="Updated At"
@@ -153,7 +108,7 @@ export const PostList = () => {
 							<Space>
 								<EditButton hideText size="small" recordItemId={value} />
 								<ShowButton hideText size="small" recordItemId={value} />
-								<DeleteButton hideText size="small" recordItemId={value} />
+								{/* <DeleteButton hideText size="small" recordItemId={value} /> */}
 							</Space>
 						);
 					}}

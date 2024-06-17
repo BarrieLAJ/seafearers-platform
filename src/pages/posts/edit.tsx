@@ -9,21 +9,12 @@ import { ICategory, ISeaWorkers } from "../../interfaces";
 export const PostEdit = () => {
 	const { formProps, saveButtonProps, formLoading } = useForm<ISeaWorkers>();
 
-	const { selectProps: categorySelectProps } = useSelect<ICategory>({
-		resource: "category",
-		optionLabel: "title",
-		optionValue: "_id",
-		pagination: {
-			mode: "off",
-		},
-	});
-
 	return (
 		<Edit saveButtonProps={saveButtonProps} isLoading={formLoading}>
 			<Form {...formProps} layout="vertical">
 				<Form.Item
-					label="Title"
-					name="title"
+					label="Name"
+					name="fullName"
 					rules={[
 						{
 							required: true,
@@ -33,8 +24,8 @@ export const PostEdit = () => {
 					<Input />
 				</Form.Item>
 				<Form.Item
-					label="Slug"
-					name={["slug", "current"]}
+					label="Phone Number"
+					name={"phoneNumber"}
 					rules={[
 						{
 							required: true,
@@ -43,26 +34,38 @@ export const PostEdit = () => {
 				>
 					<Input />
 				</Form.Item>
-				{/* <Form.Item
-					label="Category"
-					name={["categories"]}
-					getValueFromEvent={(value: string[]) => {
-						return value?.map((category) => {
-							return {
-								_ref: category,
-							};
-						});
-					}}
-					getValueProps={(value: ISeaWorkers["categories"]) => {
-						return {
-							value: value?.map((category) => category?._ref),
-						};
-					}}
+				<Form.Item
+					label="Age"
+					name={"age"}
+					rules={[
+						{
+							required: true,
+						},
+					]}
 				>
-					<Select {...categorySelectProps} mode="multiple" allowClear />
-				</Form.Item> */}
-				<Form.Item label="Content" name="content">
-					<MDEditor data-color-mode="light" />
+					<Input />
+				</Form.Item>
+				<Form.Item
+					label="Status"
+					name={"status"}
+					rules={[
+						{
+							required: true,
+						},
+					]}
+				>
+					<Input />
+				</Form.Item>
+				<Form.Item
+					label="Department"
+					name={"deparment"}
+					rules={[
+						{
+							required: true,
+						},
+					]}
+				>
+					<Input />
 				</Form.Item>
 			</Form>
 		</Edit>

@@ -1,3 +1,4 @@
+import { SanityAssetDocument } from "@sanity/client";
 export interface ICategory {
 	_updatedAt: string;
 	_createdAt: string;
@@ -8,10 +9,13 @@ export interface ICategory {
 	title: string;
 }
 
+export interface ICertificate {}
+
 export interface ISeaWorkers {
 	_createdAt: string;
 	fullName: string;
 	phoneNumber: string;
+	certificates: string[];
 	age: string;
 	deparment: string;
 	status: string;

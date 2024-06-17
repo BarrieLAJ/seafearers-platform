@@ -21,6 +21,7 @@
     ]
   },
   "dependencies": {
+    "@react-pdf/renderer": "^3.4.4",
     "@refinedev/antd": "^5.37.5",
     "@refinedev/cli": "^2.16.27",
     "@refinedev/core": "^4.48.0",
@@ -32,6 +33,7 @@
     "antd": "^5.0.5",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-pdf": "^9.0.0",
     "react-router-dom": "^6.8.1",
     "refine-sanity": "^1.1.1"
   },
